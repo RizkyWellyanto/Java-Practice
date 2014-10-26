@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;week1_assignment1_part_A.Foothill.computeSum(...)&apos; to &apos;calculateSum&apos;&#x0D;&#x0A;- Original project: &apos;CS1C_Class&apos;&#x0D;&#x0A;- Original element: &apos;week1_assignment1_part_A.Foothill.computeSum(...)&apos;&#x0D;&#x0A;- Renamed element: &apos;week1_assignment1_part_A.Foothill.calculateSum(...)&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;computeSum&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;week1_assignment1_part_A{Foothill.java[Foothill~computeSum~QArrayList\&lt;QInteger;&gt;;" name="calculateSum" references="true" stamp="1412148509306" version="1.0"/>
+</session>

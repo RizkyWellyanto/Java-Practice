@@ -1,0 +1,47 @@
+/*
+ * File: Chapter2ProChallenge17.java
+ * --------------------------------
+ * this program answer the "Programming
+ * Challenge" in Chapter 2. Number 17.
+ */
+
+import javax.swing.JOptionPane;
+
+public class Chapter2ProChallenge17 {
+	
+	public static void main(String[] args){
+		
+		// Declare the needed variables
+		int shares = 0;				// Hold the number of shares
+		double price = 0.0;			// Hold the price of each stock shares
+		double commission = 0.0;	// Hold the commission of the broker
+		double total = 0.0;			// Hold the total money spent/gained
+		
+		// Ask the user to input the number of shares bought
+		
+		
+		// Ask the Price of each stock bought
+		
+		// Ask the percentage of the commission for the broker
+		
+		// Calculate the Total Outcome
+		
+		// Show Total Outcome
+		
+		// Ask the user to input the number of shares sold
+		
+		// Ask the price of each stock sold
+		
+		// Ask the percentage of the commission for the broker
+		
+		// Calculate the Total Income
+		
+		// Show Total Income
+		
+		// Calculate Profit/Loss
+		
+		// Show the Profit/Loss
+		
+	}
+	
+}

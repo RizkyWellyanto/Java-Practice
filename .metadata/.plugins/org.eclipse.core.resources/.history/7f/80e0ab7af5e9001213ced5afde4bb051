@@ -1,0 +1,14 @@
+/*
+ * File: Chapter2ProChallenge1.java
+ * --------------------------------
+ * this program answer the "Programming
+ * Challenge" in Chapter 2. Number 1.
+ */
+
+public class Chapter2ProChallenge1 {
+	
+	public static void main(String[] args){
+		
+	}
+	
+}

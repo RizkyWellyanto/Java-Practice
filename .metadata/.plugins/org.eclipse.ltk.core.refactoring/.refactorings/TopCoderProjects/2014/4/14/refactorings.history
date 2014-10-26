@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;input&apos; in &apos;SRM144DIV1_300.BinaryCode.decode(...)&apos; to &apos;inputStr&apos;&#x0D;&#x0A;- Original project: &apos;TopCoderProjects&apos;&#x0D;&#x0A;- Original element: &apos;SRM144DIV1_300.BinaryCode.decode(String).input&apos;&#x0D;&#x0A;- Renamed element: &apos;input&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;input&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;SRM144DIV1_300{BinaryCode.java[BinaryCode~decode~QString;@input!447!458!454!458!QString;!0!true" name="inputStr" references="true" stamp="1396393097591" version="1.0"/>
+</session>

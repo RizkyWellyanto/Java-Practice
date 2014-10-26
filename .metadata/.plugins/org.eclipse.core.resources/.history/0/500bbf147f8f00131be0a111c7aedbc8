@@ -1,0 +1,97 @@
+/**
+ * File: Foothill.java
+ * -----------------------------------------------------------------------------
+ * this program is due to assignment number 4 in CS 1B Jesse Cecil Winter 2014
+ * this program is called Talent. this program is about to test the
+ * understanding and implementation of Inheritance in Java.
+ * 
+ * Name : Muhammad Rizky Wellyanto
+ * ID : 20144588
+ */
+
+// import necessary classes
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * Main Class of the Program
+ * 
+ * @author MuhammadRizky
+ * 
+ */
+public class Foothill
+{
+   // declare statics for each cards
+   static final int NUM_CARD_IMAGES = 57; // 52 + 4 jokers + 1back-of-card image
+   static Icon[] icons = new ImageIcon[NUM_CARD_IMAGES];
+   static JLabel[] labels = new JLabel[NUM_CARD_IMAGES];
+   
+   // main method
+   public static void main(String[] args)
+   {
+      int k;
+      
+      // prepare the image icon array
+      loadCardIcons();
+      
+      // establish main frame in which program will run
+      JFrame frmMyWindow = new JFrame("Transporter Room");
+      frmMyWindow.setSize(1150, 650);
+      frmMyWindow.setLocationRelativeTo(null);
+      frmMyWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      
+      // set up layout which will control placement of buttons, etc.
+      FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 5, 20);
+      frmMyWindow.setLayout(layout);
+      
+      // prepare the image label array
+      JLabel[] labels = new JLabel[NUM_CARD_IMAGES];
+      for (k = 0; k < NUM_CARD_IMAGES; k++)
+         labels[k] = new JLabel(icons[k]);
+      
+      // place your 3 controls into frame
+      for (k = 0; k < NUM_CARD_IMAGES; k++)
+         frmMyWindow.add(labels[k]);
+      
+      // show everything to the user
+      frmMyWindow.setVisible(true);
+   }
+   
+   // other methods
+   /**
+    * this method build the file names ("AC.gif", "2C.gif", "3C.gif", "TC.gif",
+    * etc.)
+    * in a SHORT loop. For each file name, read it in and use it to
+    * instantiate each of the 57 Icons in the icon[] array.
+    */
+   static void loadCardIcons()
+   {
+      
+   }
+   
+   /**
+    * turns 0 - 13 into "A", "2", "3", ... "Q", "K", "X"
+    * 
+    * @param k
+    * @return
+    */
+   static String turnIntIntoCardValue(int k)
+   {
+      StringBuilder str = new StringBuilder();
+      
+      return str.toString();
+   }
+   
+   /**
+    * turns 0 - 3 into "C", "D", "H", "S"
+    * 
+    * @param j
+    * @return
+    */
+   static String turnIntIntoCardSuit(int j)
+   {
+      StringBuilder str = new StringBuilder();
+      
+      return str.toString();
+   }
+}

@@ -1,0 +1,583 @@
+package week4_assignment4_part_A;
+
+/**
+ * CS 1C Assignment 4 - Lazy Deletion
+ * ------------------------------------------------------
+ * Name : Muhammad Rizky Wellyanto
+ * CWID : 20144588
+ * Parts : A,B
+ * Description : This is the fourth assignment of CS_1C
+ * ML F14. This program implements soft deletion on a tree.
+ * this program makes students practice their understanding
+ * about tree data structure.
+ */
+
+import java.util.*;
+
+import cs_1c.*;
+
+class PrintObject<E> implements Traverser<E>
+{
+   public void visit(E x)
+   {
+      System.out.print(x + " ");
+   }
+};
+
+public class Foothill
+{
+   public static void main(String[] args) throws Exception
+   {
+      // Part A testing
+      
+      int k;
+      FHlazySearchTree<Integer> searchTree = new FHlazySearchTree<Integer>();
+      PrintObject<Integer> intPrinter = new PrintObject<Integer>();
+      
+      searchTree.traverse(intPrinter);
+      
+      System.out.println("\ninitial size: " + searchTree.size());
+      searchTree.insert(50);
+      searchTree.insert(20);
+      searchTree.insert(30);
+      searchTree.insert(70);
+      searchTree.insert(10);
+      searchTree.insert(60);
+      
+      System.out.println("After populating -- traversal and sizes: ");
+      searchTree.traverse(intPrinter);
+      System.out.println("\ntree 1 size: " + searchTree.size()
+            + "  Hard size: " + searchTree.sizeHard());
+      
+      System.out.println("Collecting garbage on new tree - should be "
+            + "no garbage.");
+      searchTree.collectGarbage();
+      System.out.println("tree 1 size: " + searchTree.size() + "  Hard size: "
+            + searchTree.sizeHard());
+      
+      // test assignment operator
+      FHlazySearchTree<Integer> searchTree2 = (FHlazySearchTree<Integer>) searchTree
+            .clone();
+      
+      System.out.println("\n\nAttempting 1 removal: ");
+      if (searchTree.remove(20))
+         System.out.println("removed " + 20);
+      System.out.println("tree 1 size: " + searchTree.size() + "  Hard size: "
+            + searchTree.sizeHard());
+      
+      System.out.println("Collecting Garbage - should clean 1 item. ");
+      searchTree.collectGarbage();
+      System.out.println("tree 1 size: " + searchTree.size() + "  Hard size: "
+            + searchTree.sizeHard());
+      
+      System.out.println("Collecting Garbage again - no change expected. ");
+      searchTree.collectGarbage();
+      System.out.println("tree 1 size: " + searchTree.size() + "  Hard size: "
+            + searchTree.sizeHard());
+      
+      // test soft insertion and deletion:
+      
+      System.out.println("Adding 'hard' 22 - should see new sizes. ");
+      searchTree.insert(22);
+      searchTree.traverse(intPrinter);
+      System.out.println("\ntree 1 size: " + searchTree.size()
+            + "  Hard size: " + searchTree.sizeHard());
+      
+      System.out.println("\nAfter soft removal. ");
+      searchTree.remove(22);
+      searchTree.traverse(intPrinter);
+      System.out.println("\ntree 1 size: " + searchTree.size()
+            + "  Hard size: " + searchTree.sizeHard());
+      
+      System.out.println("Repeating soft removal. Should see no change. ");
+      searchTree.remove(22);
+      searchTree.traverse(intPrinter);
+      System.out.println("\ntree 1 size: " + searchTree.size()
+            + "  Hard size: " + searchTree.sizeHard());
+      
+      System.out.println("Soft insertion. Hard size should not change. ");
+      searchTree.insert(22);
+      searchTree.traverse(intPrinter);
+      System.out.println("\ntree 1 size: " + searchTree.size()
+            + "  Hard size: " + searchTree.sizeHard());
+      
+      System.out.println("\n\nAttempting 100 removals: ");
+      for (k = 100; k > 0; k--)
+      {
+         if (searchTree.remove(k))
+            System.out.println("removed " + k);
+      }
+      searchTree.collectGarbage();
+      
+      System.out.println("\nsearch_tree now:");
+      searchTree.traverse(intPrinter);
+      System.out.println("tree 1 size: " + searchTree.size()
+            + "  Hard size: " + searchTree.sizeHard());
+      
+      searchTree2.insert(500);
+      searchTree2.insert(200);
+      searchTree2.insert(300);
+      searchTree2.insert(700);
+      searchTree2.insert(100);
+      searchTree2.insert(600);
+      System.out.println("\nsearchTree2:");
+      searchTree2.traverse(intPrinter);
+      System.out.println("\ntree 2 size: " + searchTree2.size()
+            + "  Hard size: " + searchTree2.sizeHard());
+      System.out.println();
+      
+      System.out.println("\nTesting Find Min and Find Max on empty tree");
+      
+      FHlazySearchTree<Integer> searchTree3 = new FHlazySearchTree<Integer>();
+      
+      try{
+         System.out.println("Min: " + searchTree3.findMin());
+      }catch (Exception e){
+         System.out.println("ERROR!!");
+      }
+      try{
+         System.out.println("Max: " + searchTree3.findMax());
+      }catch (Exception e){
+         System.out.println("ERROR!!");
+      }
+      
+      System.out.println("\nTesting Find Min and Find Max on a full hard tree");
+      
+      searchTree2.insert(100);
+      searchTree2.insert(200);
+      searchTree2.insert(400);
+      searchTree2.insert(700);
+      searchTree2.insert(100);
+      searchTree2.insert(600);
+      
+      System.out.println("Min: " + searchTree3.findMin());
+      System.out.println("Max: " + searchTree3.findMax());
+      
+      System.out.println("\nTesting Find Min and Find Max on a soft empty tree");
+      
+      searchTree2.remove(100);
+      searchTree2.remove(200);
+      searchTree2.remove(400);
+      searchTree2.remove(700);
+      searchTree2.remove(100);
+      searchTree2.remove(600);
+      
+      System.out.println("Min: " + searchTree3.findMin());
+      System.out.println("Max: " + searchTree3.findMax());
+      
+      // part B testing
+      System.out.println("\nTesting a tree with Ebook Entries:");
+      EBookEntryReader bookInput = new EBookEntryReader("catalog-short4.txt");
+      if (bookInput.readError())
+      {
+         System.out.println("couldn't open " + bookInput.getFileName()
+               + " for input.");
+         return;
+      }
+      
+      EBookEntry.setSortType(EBookEntry.SORT_BY_TITLE);
+      
+      FHlazySearchTree<EBookEntry> bookTree = new FHlazySearchTree<EBookEntry>();
+      
+      for (int numBooks = 0; numBooks < bookInput.getNumBooks(); numBooks++)
+         bookTree.insert(bookInput.getBook(numBooks));
+      
+      System.out.println("Book Tree mSize: " + bookTree.mSize);
+      System.out.println("Book Tree mSizeHard: " + bookTree.mSizeHard);
+      
+      System.out.println("\nRemoving some books from the tree");
+      for (int numBooks = 0; numBooks < bookInput.getNumBooks(); numBooks += 3)
+         bookTree.remove(bookInput.getBook(numBooks));
+      
+      System.out.println(("Book Tree mSize: " + bookTree.mSize));
+      System.out.println("Book Tree mSizeHard: " + bookTree.mSizeHard);
+      
+      System.out.println("\nCollecting Garbage");
+      bookTree.collectGarbage();
+      
+      System.out.println(("Book Tree mSize: " + bookTree.mSize));
+      System.out.println("Book Tree mSizeHard: " + bookTree.mSizeHard);
+      
+      FHlazySTNode<EBookEntry> testRoot = bookTree.mRoot;
+      System.out.println("\nHard removing some books from the tree");
+      for (int numBooks = 0; numBooks < bookInput.getNumBooks(); numBooks += 3)
+         bookTree.removeHard(testRoot, bookInput.getBook(numBooks));
+      
+      System.out.println(("Book Tree mSize: " + bookTree.mSize));
+      System.out.println("Book Tree mSizeHard: " + bookTree.mSizeHard);
+   }
+}
+
+/**
+ * the main tree data structure class that will be used
+ * 
+ * @author MuhammadRizky
+ * 
+ * @param <E>
+ */
+class FHlazySearchTree<E extends Comparable<? super E>> implements Cloneable
+{
+   protected int mSize;
+   protected FHlazySTNode<E> mRoot;
+   protected int mSizeHard;
+   
+   public FHlazySearchTree()
+   {
+      clear();
+   }
+   
+   public boolean empty()
+   {
+      return (mSize == 0);
+   }
+   
+   public int size()
+   {
+      return mSize;
+   }
+   
+   public void clear()
+   {
+      mSize = 0;
+      mRoot = null;
+   }
+   
+   public int showHeight()
+   {
+      return findHeight(mRoot, -1);
+   }
+   
+   public int sizeHard()
+   {
+      return this.mSizeHard;
+   }
+   
+   public E findMin()
+   {
+      FHlazySTNode<E> node;
+      
+      node = findMin(mRoot);
+      if (node == null)
+         throw new NoSuchElementException();
+      return node.data;
+   }
+   
+   public E findMax()
+   {
+      FHlazySTNode<E> node;
+      
+      node = findMax(mRoot);
+      if (node == null)
+         throw new NoSuchElementException();
+      return node.data;
+   }
+   
+   public E find(E x)
+   {
+      FHlazySTNode<E> resultNode;
+      resultNode = find(mRoot, x);
+      if (resultNode == null)
+         throw new NoSuchElementException();
+      return resultNode.data;
+   }
+   
+   public boolean contains(E x)
+   {
+      return find(mRoot, x) != null;
+   }
+   
+   public boolean insert(E x)
+   {
+      int oldSize = mSize;
+      mRoot = insert(mRoot, x);
+      return (mSize != oldSize);
+   }
+   
+   public boolean remove(E x)
+   {
+      int oldSize = mSize;
+      remove(mRoot, x);
+      return (mSize != oldSize);
+   }
+   
+   public <F extends Traverser<? super E>> void traverse(F func)
+   {
+      traverse(func, mRoot);
+   }
+   
+   public Object clone() throws CloneNotSupportedException
+   {
+      FHlazySearchTree<E> newObject = (FHlazySearchTree<E>) super.clone();
+      newObject.clear();  // can't point to other's data
+      
+      newObject.mRoot = cloneSubtree(mRoot);
+      newObject.mSize = mSize;
+      
+      newObject.mSizeHard = mSizeHard;
+      
+      return newObject;
+   }
+   
+   public void collectGarbage()
+   {
+      if (mRoot != null)
+         mRoot = collectGarbage(mRoot);
+   }
+   
+   // private helper methods ----------------------------------------
+   protected FHlazySTNode<E> findMin(FHlazySTNode<E> root)
+   {
+      FHlazySTNode<E> node;
+      
+      if (root == null)
+         return null;
+      
+      node = findMin(root.lftChild);
+      if (node != null)
+         return node;
+      
+      if (root.deleted)
+         return findMin(root.rtChild);
+      else
+         return root;
+   }
+   
+   protected FHlazySTNode<E> findMax(FHlazySTNode<E> root)
+   {
+      FHlazySTNode<E> node;
+      
+      if (root == null)
+         return null;
+      
+      node = findMax(root.rtChild);
+      if (node != null)
+         return node;
+      
+      if (root.deleted)
+         return findMax(root.lftChild);
+      else
+         return root;
+   }
+   
+   protected FHlazySTNode<E> findHardMin(FHlazySTNode<E> root)
+   {
+      if (root == null)
+         return null;
+      
+      if (root.lftChild == null)
+         return root;
+      
+      return findHardMin(root.lftChild);
+   }
+   
+   protected FHlazySTNode<E> findHardMax(FHlazySTNode<E> root)
+   {
+      if (root == null)
+         return null;
+      
+      if (root.rtChild == null)
+         return root;
+      
+      return findHardMax(root.rtChild);
+   }
+   
+   protected FHlazySTNode<E> insert(FHlazySTNode<E> root, E x)
+   {
+      int compareResult;  // avoid multiple calls to compareTo()
+      
+      if (root == null)
+      {
+         mSize++;
+         mSizeHard++;
+         return new FHlazySTNode<E>(x, null, null, false);
+      }
+      
+      compareResult = x.compareTo(root.data);
+      if (compareResult < 0)
+         root.lftChild = insert(root.lftChild, x);
+      else if (compareResult > 0)
+         root.rtChild = insert(root.rtChild, x);
+      
+      else if (!root.deleted)
+         return root;
+      
+      else
+      {
+         root.deleted = false;
+         mSize++;
+         return root;
+      }
+      
+      return root;
+   }
+   
+   protected void remove(FHlazySTNode<E> root, E x)
+   {
+      int compareResult;  // avoid multiple calls to compareTo()
+      
+      if (root == null)
+         return;
+      
+      compareResult = x.compareTo(root.data);
+      if (compareResult < 0)
+         remove(root.lftChild, x);
+      else if (compareResult > 0)
+         remove(root.rtChild, x);
+      
+      // found the node
+      else if (root.deleted)
+      {
+         return;
+      }
+      else
+      {
+         root.deleted = true;
+         mSize--;
+      }
+   }
+   
+   protected FHlazySTNode<E> removeHard(FHlazySTNode<E> root, E x)
+   {
+      int compareResult;
+      
+      FHlazySTNode<E> node;
+      
+      if (root == null)
+         return null;
+      
+      compareResult = x.compareTo(root.data);
+      if (compareResult < 0)
+         root.lftChild = removeHard(root.lftChild, x);
+      else if (compareResult > 0)
+         root.rtChild = removeHard(root.rtChild, x);
+      
+      // found the node
+      else if (root.lftChild != null && root.rtChild != null)
+      {
+         node = findHardMin(root.rtChild);
+         
+         root.data = node.data;
+         root.deleted = node.deleted;
+         root.rtChild = removeHard(root.rtChild, root.data);
+      }
+      else
+      {
+         if (root.lftChild != null)
+            root = root.lftChild;
+         else
+            root = root.rtChild;
+         
+         mSizeHard--;
+      }
+      
+      return root;
+   }
+   
+   protected FHlazySTNode<E> collectGarbage(FHlazySTNode<E> node)
+   {
+      if (node == null)
+         return null;
+      
+      node.lftChild = collectGarbage(node.lftChild);
+      node.rtChild = collectGarbage(node.rtChild);
+      
+      if (node.deleted)
+         node = removeHard(node, node.data);
+      
+      return node;
+   }
+   
+   protected <F extends Traverser<? super E>> void traverse(F func,
+         FHlazySTNode<E> treeNode)
+   {
+      if (treeNode == null)
+         return;
+      
+      traverse(func, treeNode.lftChild);
+      
+      if (!treeNode.deleted)
+         func.visit(treeNode.data);
+      
+      traverse(func, treeNode.rtChild);
+   }
+   
+   protected FHlazySTNode<E> find(FHlazySTNode<E> root, E x)
+   {
+      int compareResult;  // avoid multiple calls to compareTo()
+      
+      if (root == null)
+         return null;
+      
+      compareResult = x.compareTo(root.data);
+      if (compareResult < 0)
+         return find(root.lftChild, x);
+      if (compareResult > 0)
+         return find(root.rtChild, x);
+      if (root.deleted)
+         return null;
+      return root;   // found
+   }
+   
+   protected FHlazySTNode<E> cloneSubtree(FHlazySTNode<E> root)
+   {
+      FHlazySTNode<E> newNode;
+      if (root == null)
+         return null;
+      
+      // does not set myRoot which must be done by caller
+      newNode = new FHlazySTNode<E>(root.data, cloneSubtree(root.lftChild),
+            cloneSubtree(root.rtChild), root.deleted);
+      return newNode;
+   }
+   
+   protected int findHeight(FHlazySTNode<E> treeNode, int height)
+   {
+      int leftHeight, rightHeight;
+      if (treeNode == null)
+         return height;
+      height++;
+      leftHeight = findHeight(treeNode.lftChild, height);
+      rightHeight = findHeight(treeNode.rtChild, height);
+      return (leftHeight > rightHeight) ? leftHeight : rightHeight;
+   }
+}
+
+/**
+ * the node of the FHlazySearchTree
+ * 
+ * @author MuhammadRizky
+ * 
+ * @param <E>
+ */
+class FHlazySTNode<E extends Comparable<? super E>>
+{
+   protected FHlazySTNode<E> lftChild, rtChild;
+   protected E data;
+   protected FHlazySTNode<E> myRoot;  // needed to test for certain error
+   protected boolean deleted;
+   
+   public FHlazySTNode(E d, FHlazySTNode<E> lft, FHlazySTNode<E> rt,
+         boolean deleted)
+   {
+      lftChild = lft;
+      rtChild = rt;
+      data = d;
+      this.deleted = deleted;
+   }
+   
+   public FHlazySTNode()
+   {
+      this(null, null, null, false);
+   }
+   
+   // function stubs -- for use only with AVL Trees when we extend
+   public int getHeight()
+   {
+      return 0;
+   }
+   
+   boolean setHeight(int height)
+   {
+      return true;
+   }
+}

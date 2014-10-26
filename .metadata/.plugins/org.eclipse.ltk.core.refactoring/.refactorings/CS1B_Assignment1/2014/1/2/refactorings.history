@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;upVal&apos; in &apos;Card.validate(...)&apos; to &apos;value&apos;&#x0D;&#x0A;- Original project: &apos;CS1B_Assignment1&apos;&#x0D;&#x0A;- Original element: &apos;Card.validate(char).upVal&apos;&#x0D;&#x0A;- Renamed element: &apos;upVal&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;upVal&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;{Foothill.java[Card~validate~C@upVal!1892!1901!1897!1901!C!0!true" name="value" references="true" stamp="1389483677424" version="1.0"/>
+</session>

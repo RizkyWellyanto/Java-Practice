@@ -1,0 +1,284 @@
+package week1_assignment1_part_A;
+
+/**
+ * CS 1C Assignment 1 - Subset Sum Problem
+ * ------------------------------------------------------
+ * Name : Muhammad Rizky Wellyanto
+ * CWID : 20144588
+ * Parts : A,B,C
+ * Description : This is the first assignment of CS_1C
+ * ML F14. this program is attempted to solve the
+ * subset sum problem.
+ */
+
+// necessary class
+import java.util.*;
+
+/**
+ * main client
+ * 
+ * @author MuhammadRizky
+ * 
+ */
+public class Foothill
+{
+   public static void main(String[] args) throws Exception
+   {
+      // prepare stuff
+      int TARGET = 123;
+      ArrayList<Integer> dataSet = new ArrayList<Integer>();
+      ArrayList<Sublist> choices = new ArrayList<Sublist>();
+      int k, j, numSets, max, kBest, masterSum;
+      boolean foundPerfect;
+      
+      // add stuff to the dataSet
+      dataSet.add(2);
+      dataSet.add(12);
+      dataSet.add(22);
+      dataSet.add(5);
+      dataSet.add(15);
+      dataSet.add(25);
+      dataSet.add(9);
+      dataSet.add(19);
+      dataSet.add(29);
+      
+      // show target number
+      choices.clear();
+      System.out.println("TARGET = " + TARGET);
+      
+      // first of all check whether the sum of the list is equal to target
+      masterSum = calculateSum(dataSet);
+      if (masterSum <= TARGET)
+      {
+         // if the sum doesn't even reach or equal to the target
+         System.out.println("Solution is the entire master set with sum of = "
+               + masterSum);
+         
+         // just show the whole thing
+         showList(dataSet);
+         
+         // exit main
+         return;
+      }
+      
+      // add an empty sublist that represents empty set
+      choices.add(new Sublist(dataSet));
+      
+      foundPerfect = false;
+      // loop through the dataSet
+      for (k = 0; k < dataSet.size() && !foundPerfect; k++)
+      {
+         // initial size
+         numSets = choices.size();
+         for (j = 0; j < numSets && !foundPerfect; j++)
+         {
+            // calculate the sum of the subset + new int from dataSet
+            int tempSum = choices.get(j).getSum() + dataSet.get(k);
+            
+            // if tempSum <= target, add the item to the subset
+            if (tempSum <= TARGET)
+               choices.add(choices.get(j).addItem(k));
+            
+            // if the tempSum turns out to be perfect
+            if (tempSum == TARGET)
+            {
+               // change the found perfect value to true, then break;
+               foundPerfect = true;
+            }
+         }
+      }
+      
+      // choose the best k, kBest
+      max = -1; // must be below 0, bcs sum of the subset could be zero
+      kBest = 0;
+      for (k = 0; k < choices.size(); k++)
+      {
+         // if the sum is greater than the current sum
+         // notice that the sign is greater than, so the initial max hv to be -1
+         if (choices.get(k).getSum() > max)
+         {
+            // set the new max, and choose that k
+            max = choices.get(k).getSum();
+            kBest = k;
+         }
+      }
+      
+      // show the choice
+      choices.get(kBest).showSublist();
+   }
+   
+   /**
+    * compute the sum of the list, returns the integer
+    * 
+    * @param list
+    * @return
+    */
+   static int calculateSum(ArrayList<Integer> list)
+   {
+      // local variables
+      int k, numSet, sum;
+      
+      // process / calculation
+      numSet = list.size();
+      sum = 0;
+      
+      for (k = 0; k < numSet; k++)
+         sum += list.get(k);
+      
+      // return the sum
+      return sum;
+   }
+   
+   /**
+    * show the entire list / vector to the console
+    * 
+    * @param list
+    */
+   static void showList(ArrayList<Integer> list)
+   {
+      // local var
+      int k, numSet;
+      
+      numSet = list.size();
+      
+      // process
+      for (k = 0; k < numSet; k++)
+         System.out.println("   array[" + k + "] = " + list.get(k));
+   }
+}
+
+/**
+ * sublist class. represent a sublist of a set. ArrayList is implemented.
+ * 
+ * @author MuhammadRizky
+ * 
+ */
+class Sublist implements Cloneable
+{
+   // private data of the sublist
+   private int sum = 0;
+   private ArrayList<Integer> originalObjects;
+   private ArrayList<Integer> indices;
+   
+   // constructor creates an empty Sublist (no indices)
+   public Sublist(ArrayList<Integer> orig)
+   {
+      sum = 0;
+      originalObjects = orig;
+      indices = new ArrayList<Integer>();
+   }
+   
+   int getSum()
+   {
+      return sum;
+   }
+   
+   // I have done the clone() for you, since you will need clone() inside
+   // addItem().
+   public Object clone() throws CloneNotSupportedException
+   {
+      // shallow copy
+      Sublist newObject = (Sublist) super.clone();
+      // deep copy
+      newObject.indices = (ArrayList<Integer>) indices.clone();
+      
+      return newObject;
+   }
+   
+   /**
+    * adding item to the new sublist, return the new sublist
+    * 
+    * @param indexOfItemToAdd
+    * @return
+    */
+   Sublist addItem(int indexOfItemToAdd)
+   {
+      Sublist newSubList;
+      
+      // try catch clause just in case Clone Exception is thrown
+      try
+      {
+         // create a new list then clone the sublist to the new list
+         newSubList = (Sublist) this.clone();
+         
+         // add the new item to the cloned sublist
+         newSubList.indices.add(originalObjects.get(indexOfItemToAdd));
+         
+         // change the sum of the new sublist
+         newSubList.sum += originalObjects.get(indexOfItemToAdd);
+         
+         // return the new sublist
+         return newSubList;
+      }
+      catch (CloneNotSupportedException e)
+      {
+         // just return null (i guess)
+         return null;
+      }
+   }
+   
+   /**
+    * show the element of the sublist. for output purpose.
+    */
+   void showSublist()
+   {
+      int k;
+      
+      System.out.println("====SUBLIST====");
+      System.out.println(" SUM = " + this.sum);
+      // loop through all item in the sublist and print it
+      for (k = 0; k < this.indices.size(); k++)
+         System.out.println("   array["
+               + originalObjects.indexOf(this.indices.get(k)) + "] = "
+               + this.indices.get(k));
+   }
+};
+
+/*----------------------------Test Run------------------------------------------
+
+TARGET = 4
+====SUBLIST====
+ SUM = 2
+   array[0] = 2
+
+TARGET = 44
+====SUBLIST====
+ SUM = 44
+   array[0] = 2
+   array[2] = 22
+   array[3] = 5
+   array[4] = 15
+
+TARGET = 444
+Solution is the entire master set with sum of = 138
+   array[0] = 2
+   array[1] = 12
+   array[2] = 22
+   array[3] = 5
+   array[4] = 15
+   array[5] = 25
+   array[6] = 9
+   array[7] = 19
+   array[8] = 29
+
+TARGET = 64
+====SUBLIST====
+ SUM = 64
+   array[1] = 12
+   array[2] = 22
+   array[3] = 5
+   array[5] = 25
+
+TARGET = 123
+====SUBLIST====
+ SUM = 123
+   array[0] = 2
+   array[1] = 12
+   array[2] = 22
+   array[3] = 5
+   array[5] = 25
+   array[6] = 9
+   array[7] = 19
+   array[8] = 29
+   
+ -----------------------------------------------------------------------------*/

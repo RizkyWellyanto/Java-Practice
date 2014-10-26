@@ -1,0 +1,8 @@
+1394643768639	Rename type 'FHgTreeNode'
+1394643795625	Rename type 'FHgTree'
+1394646757936	Rename method 'removeNode'
+1394650603439	Rename method 'calcVirSize'
+1394651186689	Rename local variable 'level'
+1394651838847	Rename local variable 'currentSize'
+1394651936393	Rename local variable 'startingSize'
+1394652011482	Rename local variable 'numNode'

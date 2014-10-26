@@ -1,0 +1,292 @@
+// CIS 1C Assignment #2
+// Instructor Solution Featuring clone()
+
+// client -----------------------------------------------------
+import cs_1c.*;
+import java.util.*;
+
+//------------------------------------------------------
+public class Foothill
+{
+   final static int MAT_SIZE = 100000;
+   // -------  main --------------
+   public static void main(String[] args) throws Exception
+   {
+      // 100000 x 100000 filled with 0
+      int k;
+      SparseMat<Double> mat
+         = new SparseMat<Double>(MAT_SIZE, MAT_SIZE, 0.);
+
+      // test mutators
+      for (k = 0; k < 10; k++)
+      {
+         mat.set(k, k, k*1.);
+         mat.set(4, k, k*10.);
+         mat.set(k, 4, -k*10.);
+      }
+      mat.showSubSquare(0, 12);
+      System.out.println();
+      
+      SparseMat<Double> mat2 = (SparseMat<Double>)mat.clone();
+      
+      for (k = 0; k < 10; k++)
+      {
+         mat.set(k, k, 1.);
+         mat.set(4, k, 10.);
+         mat.set(k, 4, -10.);
+      }
+      
+      mat.showSubSquare(0, 12);
+      System.out.println();
+      mat2.showSubSquare(0, 12);
+   }
+}
+
+// CIS 1C Assignment #2
+// Instructor Solution SparseMat.java
+
+
+//--------------- Class SparseMat Definition ---------------
+class SparseMat<E> implements Cloneable
+{
+   // protected enables us to safely make col/data public
+   protected class MatNode implements Cloneable
+   {
+      public int col;
+      public E data;
+      
+      // we need a default constructor for lists
+      MatNode()
+      {
+         col = 0;
+         data = null;
+      }
+
+      MatNode(int cl, E dt)
+      {
+         col = cl;
+         data = dt;
+      }
+      
+      public Object clone() throws CloneNotSupportedException
+      {
+         // shallow copy
+         MatNode newObject = (MatNode)super.clone();
+         return (Object) newObject;
+      }
+   };
+   
+   protected int rowSize, colSize;
+   protected E defaultVal;
+   protected FHarrayList < FHlinkedList< MatNode > > rows;
+   
+   public int getRowSize() { return rowSize; }
+   public int getColSize() { return colSize; }
+   
+   // constructor creates an empty Sublist (no indices)
+   public SparseMat( int numRows, int numCols, E defaultVal)
+   {
+      if ( numRows < 1 || numCols < 1 )
+         throw new IllegalArgumentException();
+      
+      rowSize = numRows;
+      colSize = numCols;
+      allocateEmptyMatrix();
+      this.defaultVal = defaultVal;
+   }
+   
+   protected void allocateEmptyMatrix()
+   {
+      int r;
+      rows = new FHarrayList < FHlinkedList< MatNode > >();
+      for (r = 0; r < rowSize; r++)
+         rows.add( new FHlinkedList< MatNode >());   // add a blank row
+   }
+   
+   public void clear()
+   {
+      int r;
+
+      for (r = 0; r < rowSize; r++)
+         rows.get(r).clear();
+   }
+   
+   // optional method - good practice for java programmers
+   public Object clone() throws CloneNotSupportedException
+   {
+      int r;
+      ListIterator<MatNode> iter;
+      FHlinkedList < MatNode > newRow;
+      
+      // shallow copy
+      SparseMat<E> newObject = (SparseMat<E>)super.clone();
+      
+      // create all new lists for the new object
+      newObject.allocateEmptyMatrix();
+     
+      // clone
+      for (r = 0; r < rowSize; r++)
+      {
+         newRow = newObject.rows.get(r);
+         // iterate along the row, looking for column c
+         for (
+               iter =
+                  (ListIterator<MatNode>)rows.get(r).listIterator();
+            iter.hasNext(); )
+         {
+            newRow.add( (MatNode) iter.next().clone() );
+         }
+      }
+      
+      return newObject;
+   }
+   
+   protected boolean valid(int r, int c)
+   {
+      if (r >= 0 && r < rowSize && c >= 0 && c < colSize)
+         return true;
+      return false;
+   }
+   
+   public boolean set(int r, int c, E x)
+   {
+      if (!valid(r, c))
+         return false;
+
+      ListIterator<MatNode> iter;
+
+      // iterate along the row, looking for column c
+      for (iter =
+         (ListIterator<MatNode>)rows.get(r).listIterator();
+         iter.hasNext(); )
+      {
+         if ( iter.next().col == c )
+         {
+            if ( x.equals(defaultVal) )
+               iter.remove();
+            else
+               iter.previous().data = x;
+            return true;
+         }
+      }
+
+      // not found
+      if (x != defaultVal)
+         rows.get(r).add( new MatNode(c, x) );
+      return true;
+   }
+   
+   public E get(int r, int c)
+   {
+      if (!valid(r, c))
+         throw new IndexOutOfBoundsException();
+
+      ListIterator<MatNode> iter;
+
+      // iterate along the row, looking for column c
+      for (iter =
+         (ListIterator<MatNode>)rows.get(r).listIterator();
+         iter.hasNext(); )
+      {
+         if ( iter.next().col == c )
+            return iter.previous().data;
+      }
+      // not found
+      return defaultVal;
+   }
+   
+   public void showSubSquare(int start, int size)
+   {
+      int r, c;
+
+      if (start < 0 || size < 0
+         || start + size > rowSize
+         || start + size > colSize )
+         return;
+
+      for (r = start; r < start + size; r++)
+      {
+         for (c = start; c < start + size; c++)
+            System.out.print( String.format("%4.1f", (Double)get(r, c)) + " " );
+         System.out.println();
+      }
+      System.out.println();
+   }
+}
+
+/* ---------------- Sample Run Featuring clone() ----------------------
+
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  1.0  0.0  0.0 -10.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  2.0  0.0 -20.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  3.0 -30.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0 10.0 20.0 30.0 -40.0 50.0 60.0 70.0 80.0 90.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -50.0  5.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -60.0  0.0  6.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -70.0  0.0  0.0  7.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -80.0  0.0  0.0  0.0  8.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -90.0  0.0  0.0  0.0  0.0  9.0  0.0  0.0
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+
+
+ 1.0  0.0  0.0  0.0 -10.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  1.0  0.0  0.0 -10.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  1.0  0.0 -10.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  1.0 -10.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+10.0 10.0 10.0 10.0 -10.0 10.0 10.0 10.0 10.0 10.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -10.0  1.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -10.0  0.0  1.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -10.0  0.0  0.0  1.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -10.0  0.0  0.0  0.0  1.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -10.0  0.0  0.0  0.0  0.0  1.0  0.0  0.0
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+
+
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  1.0  0.0  0.0 -10.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  2.0  0.0 -20.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  3.0 -30.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0 10.0 20.0 30.0 -40.0 50.0 60.0 70.0 80.0 90.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -50.0  5.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -60.0  0.0  6.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -70.0  0.0  0.0  7.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -80.0  0.0  0.0  0.0  8.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0 -90.0  0.0  0.0  0.0  0.0  9.0  0.0  0.0
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+ 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+
+---------------------------------------------------------- */
+
+Hi Kevin,
+Good job, your program appears to be working.
+There are some problems, feedback below.
+ 
+Part A
+SparseMatrix:
+ 
+Constructor SparseMat: spec - throw exception if parameter is invalid
+ 
+allocateEmptyMatrix: good
+ 
+set(): problem: if node does not exist and value is default, you add it.
+       So, this is not a sparse matrix.
+      
+get() parameter validation incorrect (otherwise, good)
+ 
+showSubSquare(): Good
+ 
+clear(): good
+ 
+Code: -4
+ 
+Style: Good
+Output: Good
+ 
+Part B (Extra Credit)
+clone(): good
++ 2
+ 
+Late: -1
+Score: 17

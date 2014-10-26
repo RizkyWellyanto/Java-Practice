@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;Readfile.java&apos; to &apos;Foothill.java&apos;&#x0D;&#x0A;- Original project: &apos;Phoenix&apos;&#x0D;&#x0A;- Original element: &apos;Readfile.java&apos;&#x0D;&#x0A;- Renamed element: &apos;Foothill.java&apos;" description="Rename compilation unit &apos;Readfile.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;{Readfile.java" name="Foothill.java" references="false" stamp="1385946915349" version="1.0"/>
+</session>

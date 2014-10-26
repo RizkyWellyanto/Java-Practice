@@ -1,0 +1,33 @@
+Welcome to Wellyanto's Jack-Poke-pot Machine
+
+The game is really simple: it's just a pokemon
+themed Jackpot Machine.
+
+To play, Just enter your name and the amount of money you had, and then 
+click Play.
+- the name must be between 1-100 characters
+- the amount of money must be between $1-$1,000,000
+
+You can slide the slider at the bottom of the Jackpot frame to control how much 
+money you bet. Once you clicked Roll, the amount of bet is taken by the Jackpot 
+Machine, and the three picture will be randomized. 
+
+There are four possible pictures of pokemon: 
+- Bulbasaur the green Dinosaur (50% chance)
+- Charmander (25% Chance)the red lizard
+- Squirtle the Blue turtle (12.5% chance)
+- and Mew the Legendary Pokemon (12.5% chance)
+
+Once the three pictures are randomized, the player will have the reward based
+on the combinations of pictures that showed up:
+- One Charmander will give = 5 * bet
+- Two Charmander will give = 15 * bet
+- Three Charmander will give = 30 * bet
+- Three Bulbasaur will give = 50 * bet
+- Three Mew will give = 100 * bet
+- if none of these result are met, player doesn't win anything
+
+Player lose if he/she ran out of money.
+Player wins if he/she got at least $1,000,000
+
+That's the basic instructions, Good Luck!

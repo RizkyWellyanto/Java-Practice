@@ -1,0 +1,76 @@
+/*
+ * File: Chapter2ProChallenge17.java
+ * --------------------------------
+ * this program answer the "Programming
+ * Challenge" in Chapter 2. Number 17.
+ */
+
+import javax.swing.JOptionPane;
+
+public class Chapter2ProChallenge17 {
+	
+	public static void main(String[] args){
+		
+		// Declare the needed variables
+		int shares = 0;					// Hold the number of shares
+		double price = 0.0;				// Hold the price of each stock shares
+		double commissionRate = 0.0;	// Hold the commission of the broker
+		double nettPrice = 0.0;			// Hold the price of all of the shares
+		double commission = 0.0;		// Hold the total money given to the broker
+		double outcome = 0.0;			// Hold the outcome or the money spent
+		double income = 0.0;			// Hold the income or money gained
+		double profit = 0.0;				// Hold the profit or loss
+		String str;						// Hold the input from the user, needed if using JOptionPane
+		
+		// Ask the user to input the number of shares bought
+		str = JOptionPane.showInputDialog("Please input the number of stock shares bought");
+		shares = Integer.parseInt(str);
+		
+		// Ask the Price of each stock bought
+		str = JOptionPane.showInputDialog("Please input the price of each stock shares bought");
+		price = Double.parseDouble(str);
+		
+		// Ask the percentage of the commission rate for the broker
+		str = JOptionPane.showInputDialog("Please input the percentage of commission of the broker you've paid (in decimal)");
+		commissionRate = Double.parseDouble(str);
+		
+		// Calculate the Total Outcome
+		nettPrice = shares * price;
+		commission = nettPrice * commissionRate;
+		outcome = nettPrice + commission;
+				
+		// Show Total Outcome
+		
+		
+		// Ask the user to input the number of shares sold
+		str = JOptionPane.showInputDialog("Please input the number of stock shares sold");
+		shares = Integer.parseInt(str);
+		
+		// Ask the price of each stock sold
+		str = JOptionPane.showInputDialog("Please input the price of each stock shares sold");
+		price = Double.parseDouble(str);
+		
+		// Ask the percentage of the commission rate for the broker
+		str = JOptionPane.showInputDialog("Please input the percentage of commission of the broker you've paid (in decimal)");
+		commissionRate = Double.parseDouble(str);
+		
+		// Calculate the Total Income
+		nettPrice = shares * price;
+		commission = nettPrice * commissionRate;
+		income = nettPrice + commission;
+		
+		// Show Total Income
+		
+		
+		// Calculate Profit/Loss
+		profit = income - outcome;
+		
+		// Show the Profit/Loss
+		
+		
+		// Exit
+		System.exit(0);
+		
+	}
+	
+}

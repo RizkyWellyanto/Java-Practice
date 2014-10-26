@@ -1,0 +1,49 @@
+/*
+ * File: LatihanPrintWriterClass.java
+ * ----------------------------------
+ * this program simply shows the usage
+ * of PrintWriter class and the syntax of
+ * the instance itself.
+ */
+
+// Import necessary classes
+import java.io.*;
+import javax.swing.JOptionPane;
+
+public class latihanPrintWriterClass {
+	
+	// Main Method (With an Exception)
+	public static void main(String args[]) throws IOException {
+		// Declare Necessary variables
+		int numFriends;
+		String fileName;
+		String friendName;
+		String input;
+				
+		// Ask the number of friends
+		input = JOptionPane.showInputDialog("How many Friends do you want to write? (integer)");
+		numFriends = Integer.parseInt(input);
+
+		// Open the file
+		input = JOptionPane.showInputDialog("Enter File Name");
+		fileName = input;
+		fileName = "fileName" + ".txt";
+		PrintWriter outputFile = new PrintWriter(fileName);
+		
+		// Get data and write it on the file
+		for(int i = 1; i <= numFriends; i++){
+			
+			// Get the name of the friend
+			input = JOptionPane.showInputDialog("Enter the name of your friend Number " + i + ": ");
+			friendName = input;
+			
+			// Input The name to the outout file
+			outputFile.println(friendName);
+		}
+		
+		// Close the file
+		outputFile.close();
+		JOptionPane.showMessageDialog(null, "Data Written to The File");
+		
+	}
+}

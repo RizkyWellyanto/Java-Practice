@@ -1,0 +1,10 @@
+1382907451574	Move compilation unit
+1383032236804	Rename local variable 'outputChar'
+1383032639601	Rename local variable 'inputString'
+1383032878096	Rename local variable 'inputStr'
+1383033064133	Rename local variable 'inputString'
+1383033582863	Rename local variable 'targetStr'
+1383033598876	Rename local variable 'keyChara'
+1383033609414	Rename local variable 'targetStr'
+1383157800391	Rename field 'STR_MAX_LEN'
+1383157810309	Rename field 'STR_MIN_LEN'

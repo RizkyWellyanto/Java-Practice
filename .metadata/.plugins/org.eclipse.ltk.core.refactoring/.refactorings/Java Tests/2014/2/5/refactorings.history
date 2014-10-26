@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;Foothill&apos; to &apos;TestClass&apos;&#x0D;&#x0A;- Original project: &apos;Java Midterm&apos;&#x0D;&#x0A;- Original element: &apos;Foothill&apos;&#x0D;&#x0A;- Renamed element: &apos;TestClass&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Foothill&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;{Foothill.java[Foothill" matchStrategy="1" name="TestClass" qualified="false" references="true" similarDeclarations="false" stamp="1391287926893" textual="false" version="1.0"/>
+</session>

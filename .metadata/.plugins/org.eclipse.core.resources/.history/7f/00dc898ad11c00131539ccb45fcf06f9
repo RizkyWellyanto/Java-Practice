@@ -1,0 +1,35 @@
+/*
+ * File: LatihanPrintWriterClass.java
+ * ----------------------------------
+ * this program simply shows the usage
+ * of PrintWriter class and the syntax of
+ * the instance itself.
+ */
+
+// Import necessary classes
+import java.io.*;
+import java.util.Scanner;
+
+public class latihanPrintWriterClass {
+	
+	// Main Method (With an Exception)
+	public static void main(String args[]) throws IOException {
+		// Declare Necessary variables
+		int numFriends;
+		String fileName;
+		String friendName;
+		
+		// Create a scanner object
+		Scanner keyboard = new Scanner(System.in);
+		
+		// Ask the number of friends
+		
+		// Open the file
+		
+		// Get data and write it on the file
+		
+		// Close the file
+		
+		
+	}
+}

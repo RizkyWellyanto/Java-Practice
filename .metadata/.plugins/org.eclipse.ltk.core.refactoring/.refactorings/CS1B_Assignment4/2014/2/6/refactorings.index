@@ -1,0 +1,8 @@
+1391321671679	Rename local variable 'tidy'
+1391326405178	Rename field 'DEFAULT_NAME'
+1391326409835	Rename field 'DEFAULT_INCOME'
+1391326414616	Rename field 'DEFAULT_PERCENT_CUT'
+1391326432918	Rename local variable 'formatter'
+1391326441562	Rename local variable 'clean'
+1391608842835	Rename method 'validateRank'
+1391721373282	Delete elements

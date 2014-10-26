@@ -1,0 +1,28 @@
+1394500709866	Rename type 'FHgTree'
+1394500724425	Rename type 'FHgTreeNode'
+1394500843972	Delete elements
+1394507384589	Rename local variable 'sb'
+1394507393156	Rename local variable 'chld'
+1394507399198	Rename local variable 'prv'
+1394507413698	Rename local variable 'bool'
+1394507636097	Rename method 'setChild'
+1394598643279	Move compilation units
+1394598656309	Move compilation units
+1394598659751	Move compilation unit
+1394598671372	Move compilation unit
+1394600015723	Rename method 'removeNodeSD'
+1394604621578	Rename method 'flagNodeSD'
+1394604629699	Rename method 'flagNode'
+1394636129028	Rename package 'FHsd'
+1394636150439	Move compilation unit
+1394636170192	Move compilation unit
+1394636353153	Move compilation unit
+1394636380585	Move compilation unit
+1394636385990	Delete element
+1394636398642	Rename package 'FHsdTree'
+1394636404259	Move compilation unit
+1394636410041	Delete element
+1394636418468	Move compilation unit
+1394636422915	Delete element
+1394639002841	Rename method 'traverse'
+1394643747591	Copy compilation unit
