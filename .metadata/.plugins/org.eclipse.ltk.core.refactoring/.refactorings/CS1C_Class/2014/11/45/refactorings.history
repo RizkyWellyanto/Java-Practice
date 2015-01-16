@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;k&apos; in &apos;week6_assignment6_part_A.Foothill.main(...)&apos; to &apos;i&apos;&#x0D;&#x0A;- Original project: &apos;CS1C_Class&apos;&#x0D;&#x0A;- Original element: &apos;week6_assignment6_part_A.Foothill.main(String[]).k&apos;&#x0D;&#x0A;- Renamed element: &apos;k&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;k&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;week6_assignment6_part_A{Foothill.java[Foothill~main~\[QString;@k!1379!1387!1383!1383!I!0!false" name="i" references="true" stamp="1415232709223" version="1.0"/>
+</session>

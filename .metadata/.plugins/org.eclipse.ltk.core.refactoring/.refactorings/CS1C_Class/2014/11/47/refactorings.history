@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;week8_insertion_sort_example&apos; to &apos;week8_insertion_sort_vs_java_array_sort&apos;&#x0D;&#x0A;- Original project: &apos;CS1C_Class&apos;&#x0D;&#x0A;- Original element: &apos;CS1C_Class/src/week8_insertion_sort_example&apos;&#x0D;&#x0A;- Renamed element: &apos;CS1C_Class/src/week8_insertion_sort_vs_java_array_sort&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;week8_insertion_sort_example&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;week8_insertion_sort_example" name="week8_insertion_sort_vs_java_array_sort" qualified="false" references="true" stamp="1416442226705" textual="false" version="1.0"/>
+</session>

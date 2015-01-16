@@ -1,34 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<section name="FileSystemImportWizard">
-		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
-		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID"/>
-		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
-			<item value="C:\Users\R12KY\workspace\Assignment1"/>
-		</list>
-	</section>
-	<section name="org.eclipse.ui.internal.QuickAccess">
-		<item value="1440" key="dialogWidth"/>
-		<item value="789" key="dialogHeight"/>
-		<list key="orderedProviders">
-		</list>
-		<list key="textArray">
-		</list>
-		<list key="orderedElements">
-		</list>
-		<list key="textEntries">
-		</list>
-	</section>
 	<section name="WorkbenchPreferenceDialogSettings">
 		<item value="130" key="DIALOG_Y_ORIGIN"/>
 		<item value="240" key="DIALOG_X_ORIGIN"/>
 	</section>
-	<section name="ZipFileImportWizard">
-		<item value="false" key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
-		<list key="WizardZipFileResourceImportPage1.STORE_SOURCE_NAMES_ID">
-			<item value="C:\Users\MuhammadRizky\Downloads\iTunes_Folder.zip"/>
-			<item value="C:\Users\MuhammadRizky\Downloads\cs_1c_package_v_6.jar"/>
-			<item value="C:\Users\MuhammadRizky\Downloads\cs_1c_package_v_5.jar"/>
+	<section name="org.eclipse.ui.internal.QuickAccess">
+		<item value="766" key="dialogHeight"/>
+		<item value="1358" key="dialogWidth"/>
+		<list key="textEntries">
+		</list>
+		<list key="orderedElements">
+		</list>
+		<list key="orderedProviders">
+		</list>
+		<list key="textArray">
 		</list>
 	</section>
 	<section name="NewWizardAction">
@@ -36,15 +21,31 @@
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 		</list>
 	</section>
+	<section name="ZipFileImportWizard">
+		<item value="false" key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
+		<list key="WizardZipFileResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\MuhammadRizky\Dropbox\workspace - java\CS1C_Class\src\week9_assignment8_partA\poi-src-3.10.1-20140818.zip"/>
+			<item value="C:\Users\MuhammadRizky\Downloads\iTunes_Folder.zip"/>
+			<item value="C:\Users\MuhammadRizky\Downloads\cs_1c_package_v_6.jar"/>
+			<item value="C:\Users\MuhammadRizky\Downloads\cs_1c_package_v_5.jar"/>
+		</list>
+	</section>
 	<section name="ImportExportAction">
+		<item value="org.eclipse.jdt.internal.ui.fatjarpackager.JarPackageWizard" key="ImportExportPage.STORE_SELECTED_EXPORT_WIZARD_ID"/>
 		<item value="org.eclipse.ui.wizards.import.ZipFile" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
-		<item value="org.eclipse.jdt.internal.ui.jarpackager.JarPackageWizard" key="ImportExportPage.STORE_SELECTED_EXPORT_WIZARD_ID"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
 			<item value="org.eclipse.jst.j2ee.internal"/>
 		</list>
 		<list key="ImportExportPage.STORE_EXPANDED_EXPORT_CATEGORIES">
 			<item value="org.eclipse.jdt.ui.Java"/>
+		</list>
+	</section>
+	<section name="FileSystemImportWizard">
+		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID"/>
+		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
+		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\R12KY\workspace\Assignment1"/>
 		</list>
 	</section>
 </section>
